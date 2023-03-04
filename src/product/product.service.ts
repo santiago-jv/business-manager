@@ -1,6 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import e from 'express';
 import { BusinessService } from 'src/business/business.service';
 import { Repository } from 'typeorm';
 import { ProductDto } from './product.dto';
