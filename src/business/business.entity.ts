@@ -1,3 +1,4 @@
+import { Product } from 'src/product/product.entity';
 import { User } from 'src/user/user.entity';
 import {
   Entity,
@@ -6,6 +7,7 @@ import {
   OneToOne,
   CreateDateColumn,
   JoinColumn,
+  OneToMany
 } from 'typeorm';
 
 @Entity({
@@ -24,4 +26,7 @@ export class Business {
   @OneToOne(() => User)
   @JoinColumn({ name: 'user_id' })
   user: User;
+
+  @OneToMany(() => Product, product => product.business)
+  products: Product[];
 }

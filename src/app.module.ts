@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { User } from './user/user.entity';
 import { UserModule } from './user/user.module';
 import { BusinessModule } from './business/business.module';
+import { ProductModule } from './product/product.module';
 console.log(process.env.DB_HOST);
 @Module({
   imports: [
@@ -24,6 +25,7 @@ console.log(process.env.DB_HOST);
     }),
     UserModule,
     BusinessModule,
+    ProductModule,
     
   ],
   providers: [AppService],
