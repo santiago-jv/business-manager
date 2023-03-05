@@ -1,4 +1,5 @@
 import { Product } from 'src/product/product.entity';
+import { Transaction } from 'src/transaction/entities/transaction.entity';
 import { User } from 'src/user/user.entity';
 import {
   Entity,
@@ -14,13 +15,13 @@ import {
   name: 'businesses',
 })
 export class Business {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column()
   name: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn({name:'created_at'})
   createdAt: Date;
 
   @OneToOne(() => User)
@@ -29,4 +30,7 @@ export class Business {
 
   @OneToMany(() => Product, product => product.business)
   products: Product[];
+
+  @OneToMany(() => Transaction, (transaction) => transaction.business)
+  transactions: Transaction[];
 }

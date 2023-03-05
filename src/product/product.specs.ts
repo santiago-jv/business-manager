@@ -12,7 +12,7 @@ export namespace CreateProductSpecsV1 {
         message: 'Product created',
         data: {
           product: {
-            name: 'Nombre del productp',
+            name: 'Nombre del producto',
             cost: 2000,
             price: 3500,
             quantity: 20,
@@ -43,7 +43,7 @@ export namespace ProductListSpecsV1 {
           products: [
             {
               id: 1,
-              name: 'Nombre del productO',
+              name: 'Nombre del product',
               cost: 2000,
               price: 3500,
               quantity: 20,

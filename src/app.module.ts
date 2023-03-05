@@ -6,7 +6,7 @@ import { User } from './user/user.entity';
 import { UserModule } from './user/user.module';
 import { BusinessModule } from './business/business.module';
 import { ProductModule } from './product/product.module';
-console.log(process.env.DB_HOST);
+import { TransactionModule } from './transaction/transaction.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -19,13 +19,13 @@ console.log(process.env.DB_HOST);
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      synchronize: true,
-      timezone: 'America/Bogota',
+      synchronize: true, 
       autoLoadEntities:true
     }),
     UserModule,
     BusinessModule,
     ProductModule,
+    TransactionModule,
     
   ],
   providers: [AppService],

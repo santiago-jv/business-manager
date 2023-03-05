@@ -12,7 +12,10 @@ export class ProductController {
   @ApiResponse(CreateProductSpecsV1.Response)
   async createProduct(@Body() productData: ProductDto) {
     //TODO: Use businessId from token
-    const newProduct = await this.productService.createProduct(productData, 1);
+    const newProduct = await this.productService.createProduct(
+      productData,
+      '9b83514c-7446-4cf6-b59e-233e04cd19e9',
+    );
 
     return {
       statusCode: HttpStatus.CREATED,
@@ -25,7 +28,7 @@ export class ProductController {
   @ApiResponse(ProductListSpecsV1.Response)
   async getProducts() {
     //TODO: Use businessId from token
-    const products = await this.productService.findProducts(1);
+    const products = await this.productService.findProducts('wdef');
 
     return {
       statusCode: HttpStatus.OK,

@@ -1,10 +1,12 @@
 import { Business } from 'src/business/business.entity';
+import { TransactionDetail } from 'src/transaction/entities/transaction-detail.entity';
 import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
   JoinColumn,
+  OneToMany,
   ManyToOne,
 } from 'typeorm';
 
@@ -12,8 +14,8 @@ import {
   name: 'products',
 })
 export class Product {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column()
   name: string;
@@ -27,13 +29,16 @@ export class Product {
   @Column()
   quantity: number;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, name: 'image_url' })
   imageUrl?: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
   @ManyToOne(() => Business, (business) => business.products)
   @JoinColumn({ name: 'business_id' })
   business: Business;
+
+  @OneToMany(() => TransactionDetail, (transactionDetail) => transactionDetail.product)
+  transactionDetails: TransactionDetail[];
 }
