@@ -3,6 +3,7 @@ import { BusinessDto } from './business.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Business } from './business.entity';
+import { User } from 'src/user/user.entity';
 @Injectable()
 export class BusinessService {
   constructor(
@@ -21,5 +22,9 @@ export class BusinessService {
   }
   async findOneById(businessId: string) {
     return this.businessesRepository.findOneBy({ id: businessId });
+  }
+
+  async findOneByUserId(id:string) {
+    return this.businessesRepository.findOneBy({user:{id}})
   }
 }

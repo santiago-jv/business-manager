@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import { Business } from 'src/business/business.entity';
 import {
   Entity,
@@ -23,6 +24,7 @@ export class User {
   email: string;
 
   @Column()
+  @Exclude()
   password: string;
 
   @CreateDateColumn({name:'created_at'})

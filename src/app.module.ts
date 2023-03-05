@@ -7,6 +7,7 @@ import { UserModule } from './user/user.module';
 import { BusinessModule } from './business/business.module';
 import { ProductModule } from './product/product.module';
 import { TransactionModule } from './transaction/transaction.module';
+import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -26,6 +27,7 @@ import { TransactionModule } from './transaction/transaction.module';
     BusinessModule,
     ProductModule,
     TransactionModule,
+    AuthModule,
     
   ],
   providers: [AppService],
