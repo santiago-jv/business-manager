@@ -19,7 +19,7 @@ export class BusinessService {
       );
     }
   }
-  async findOneById(businessId: number) {
+  async findOneById(businessId: string) {
     return this.businessesRepository.findOneBy({ id: businessId });
   }
 }

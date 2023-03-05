@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BusinessService } from 'src/business/business.service';
 import { Repository } from 'typeorm';
@@ -11,7 +11,7 @@ export class ProductService {
     private productsRepository: Repository<Product>,
     private readonly businessService: BusinessService,
   ) {}
-  async createProduct(productData: ProductDto, businessId: number) {
+  async createProduct(productData: ProductDto, businessId: string) {
     try {
       const business = await this.businessService.findOneById(businessId);
       const product = await this.productsRepository.save(productData);
@@ -25,8 +25,29 @@ export class ProductService {
     }
   }
 
-  async findProducts(businessId: number) {
+  async findProducts(businessId: string) {
     const business = await this.businessService.findOneById(businessId);
     return this.productsRepository.findBy({ business: { id: business.id } });
+  }
+
+  async updateStock(id:string,quantityRequested:number) {
+    const product = await this.productsRepository.findOneBy({
+      id,
+    });
+    if (!product) {
+      throw new NotFoundException('Product not found');
+    }
+    if (product.quantity - quantityRequested < 0) {
+      throw new BadRequestException('Product out of stock');
+    }
+    await this.productsRepository.update(
+      {
+        id,
+      },
+      {
+        quantity: product.quantity - quantityRequested,
+      },
+    );
+    return product;
   }
 }
